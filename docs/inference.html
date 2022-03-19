@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Data Analysis and Visualization</title>
+  <meta name="description" content="This is a course on using R focused on data analysis and visualization through case studies.">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a course on using R focused on data analysis and visualization through case studies." />
+  <meta name="github-repo" content="jonpage/r-course" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This is a course on using R focused on data analysis and visualization through case studies." />
+  
+
+<meta name="author" content="Jonathan Page">
+
+
+<meta name="date" content="2017-11-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="trifecta.html">
+<link rel="next" href="confidence-intervals.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Syllabus</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hours"><i class="fa fa-check"></i>Office Hours</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#student-learning-objectives"><i class="fa fa-check"></i>Student Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#required"><i class="fa fa-check"></i>Required</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recommended"><i class="fa fa-check"></i>Recommended:</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-requirements"><i class="fa fa-check"></i>Course Requirements</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#weekly-assignments-30"><i class="fa fa-check"></i>Weekly assignments (30%)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#individual-project"><i class="fa fa-check"></i>Individual Project</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#project-assignments-30"><i class="fa fa-check"></i>Project assignments (30%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#project-proposal-presentation-5"><i class="fa fa-check"></i>Project proposal presentation (5%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#final-project-20"><i class="fa fa-check"></i>Final project (20%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#final-project-presentation-participation-15"><i class="fa fa-check"></i>Final project presentation participation (15%)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-1"><i class="fa fa-check"></i>Week 1</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-2"><i class="fa fa-check"></i>Week 2</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-3"><i class="fa fa-check"></i>Week 3</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-4"><i class="fa fa-check"></i>Week 4</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-5"><i class="fa fa-check"></i>Week 5</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-6"><i class="fa fa-check"></i>Week 6</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-7"><i class="fa fa-check"></i>Week 7</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-8"><i class="fa fa-check"></i>Week 8</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-9"><i class="fa fa-check"></i>Week 9</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-10"><i class="fa fa-check"></i>Week 10</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-11"><i class="fa fa-check"></i>Week 11</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-12"><i class="fa fa-check"></i>Week 12</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-13"><i class="fa fa-check"></i>Week 13</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-14"><i class="fa fa-check"></i>Week 14</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-15"><i class="fa fa-check"></i>Week 15</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-16"><i class="fa fa-check"></i>Week 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other Resources</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#statistics"><i class="fa fa-check"></i>Statistics</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#courses"><i class="fa fa-check"></i>Courses</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#papers"><i class="fa fa-check"></i>Papers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html"><i class="fa fa-check"></i>Weekly Assignments</a><ul>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html#creating-the-r-markdown-files"><i class="fa fa-check"></i>Creating the R Markdown files</a></li>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html#submitting-your-assignment"><i class="fa fa-check"></i>Submitting your assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html"><i class="fa fa-check"></i>Individual Project</a><ul>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#project-assignments"><i class="fa fa-check"></i>Project assignments</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#project-proposal-presentation"><i class="fa fa-check"></i>Project proposal presentation</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#final-project-rmarkdown"><i class="fa fa-check"></i>Final project RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#final-project-presentation-participation"><i class="fa fa-check"></i>Final project presentation participation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html"><i class="fa fa-check"></i>Final Project Rubric</a><ul>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-introduction-10"><i class="fa fa-check"></i>Section: Introduction (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-data-10"><i class="fa fa-check"></i>Section: Data (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-analysis-and-results-30"><i class="fa fa-check"></i>Section: Analysis and Results (30%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-conclusion-10"><i class="fa fa-check"></i>Section: Conclusion (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-organization-10"><i class="fa fa-check"></i>General: Organization (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-grammar-10"><i class="fa fa-check"></i>General: Grammar (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-code-20"><i class="fa fa-check"></i>General: Code (20%)</a></li>
+</ul></li>
+<li class="part"><span><b>I R Tutorials</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-markdown"><i class="fa fa-check"></i><b>1.1</b> R Markdown</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#working-with-data-already-loaded-into-r"><i class="fa fa-check"></i><b>1.2</b> Working with data already loaded into R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#numeric-summaries"><i class="fa fa-check"></i><b>1.2.1</b> Numeric summaries</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#visual-summaries"><i class="fa fa-check"></i><b>1.2.2</b> Visual summaries</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#distribution-plots"><i class="fa fa-check"></i><b>1.2.3</b> Distribution plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#assignment"><i class="fa fa-check"></i><b>1.3</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="read-data.html"><a href="read-data.html"><i class="fa fa-check"></i><b>2</b> Reading data</a><ul>
+<li class="chapter" data-level="2.1" data-path="read-data.html"><a href="read-data.html#data-source"><i class="fa fa-check"></i><b>2.1</b> Data Source:</a></li>
+<li class="chapter" data-level="2.2" data-path="read-data.html"><a href="read-data.html#read_csv"><i class="fa fa-check"></i><b>2.2</b> <code>read_csv</code></a></li>
+<li class="chapter" data-level="2.3" data-path="read-data.html"><a href="read-data.html#dplyr"><i class="fa fa-check"></i><b>2.3</b> <code>dplyr</code></a></li>
+<li class="chapter" data-level="2.4" data-path="read-data.html"><a href="read-data.html#first-look-at-ggplot2"><i class="fa fa-check"></i><b>2.4</b> First Look at <code>ggplot2</code></a></li>
+<li class="chapter" data-level="2.5" data-path="read-data.html"><a href="read-data.html#heatmaps"><i class="fa fa-check"></i><b>2.5</b> Heatmaps</a></li>
+<li class="chapter" data-level="2.6" data-path="read-data.html"><a href="read-data.html#hexbins"><i class="fa fa-check"></i><b>2.6</b> Hexbins</a></li>
+<li class="chapter" data-level="2.7" data-path="read-data.html"><a href="read-data.html#other-topics-from-this-dataset"><i class="fa fa-check"></i><b>2.7</b> Other topics from this dataset</a></li>
+<li class="chapter" data-level="2.8" data-path="read-data.html"><a href="read-data.html#assignment-1"><i class="fa fa-check"></i><b>2.8</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html"><i class="fa fa-check"></i><b>3</b> Facets, Bubbles, and Transparency</a><ul>
+<li class="chapter" data-level="3.1" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#data"><i class="fa fa-check"></i><b>3.1</b> Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#importing-non-standard-excel-files"><i class="fa fa-check"></i><b>3.1.1</b> Importing non-standard Excel files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#facets"><i class="fa fa-check"></i><b>3.2</b> Facets</a></li>
+<li class="chapter" data-level="3.3" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#bubbles"><i class="fa fa-check"></i><b>3.3</b> Bubbles</a></li>
+<li class="chapter" data-level="3.4" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#transparency"><i class="fa fa-check"></i><b>3.4</b> Transparency</a></li>
+<li class="chapter" data-level="3.5" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#facets-1"><i class="fa fa-check"></i><b>3.5</b> Facets</a></li>
+<li class="chapter" data-level="3.6" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#assignment-2"><i class="fa fa-check"></i><b>3.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lines.html"><a href="lines.html"><i class="fa fa-check"></i><b>4</b> Lines and Curves</a><ul>
+<li class="chapter" data-level="4.1" data-path="lines.html"><a href="lines.html#data-1"><i class="fa fa-check"></i><b>4.1</b> Data</a></li>
+<li class="chapter" data-level="4.2" data-path="lines.html"><a href="lines.html#geom_smooth"><i class="fa fa-check"></i><b>4.2</b> geom_smooth</a></li>
+<li class="chapter" data-level="4.3" data-path="lines.html"><a href="lines.html#geom_abline"><i class="fa fa-check"></i><b>4.3</b> geom_abline</a></li>
+<li class="chapter" data-level="4.4" data-path="lines.html"><a href="lines.html#geom_vline"><i class="fa fa-check"></i><b>4.4</b> geom_vline</a></li>
+<li class="chapter" data-level="4.5" data-path="lines.html"><a href="lines.html#hline"><i class="fa fa-check"></i><b>4.5</b> hline</a></li>
+<li class="chapter" data-level="4.6" data-path="lines.html"><a href="lines.html#assignment-3"><i class="fa fa-check"></i><b>4.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot-exts.html"><a href="ggplot-exts.html"><i class="fa fa-check"></i><b>5</b> Scatter Plot Matrices and Extensions</a><ul>
+<li class="chapter" data-level="5.1" data-path="ggplot-exts.html"><a href="ggplot-exts.html#data-2"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="ggplot-exts.html"><a href="ggplot-exts.html#ggplot2-extensions"><i class="fa fa-check"></i><b>5.2</b> ggplot2 extensions</a></li>
+<li class="chapter" data-level="5.3" data-path="ggplot-exts.html"><a href="ggplot-exts.html#ggjoy"><i class="fa fa-check"></i><b>5.3</b> ggjoy</a></li>
+<li class="chapter" data-level="5.4" data-path="ggplot-exts.html"><a href="ggplot-exts.html#scatterplot-matrix-ggallyggscatmat"><i class="fa fa-check"></i><b>5.4</b> scatterplot matrix (GGally::ggscatmat)</a></li>
+<li class="chapter" data-level="5.5" data-path="ggplot-exts.html"><a href="ggplot-exts.html#assignment-4"><i class="fa fa-check"></i><b>5.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html"><i class="fa fa-check"></i><b>6</b> Boxplots and Violin Plots</a><ul>
+<li class="chapter" data-level="6.1" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#data-3"><i class="fa fa-check"></i><b>6.1</b> Data</a></li>
+<li class="chapter" data-level="6.2" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#boxplots"><i class="fa fa-check"></i><b>6.2</b> Boxplots</a></li>
+<li class="chapter" data-level="6.3" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#violin-plots"><i class="fa fa-check"></i><b>6.3</b> Violin Plots</a></li>
+<li class="chapter" data-level="6.4" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#dot-plots"><i class="fa fa-check"></i><b>6.4</b> Dot Plots</a></li>
+<li class="chapter" data-level="6.5" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#assignment-5"><i class="fa fa-check"></i><b>6.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geom-spoke.html"><a href="geom-spoke.html"><i class="fa fa-check"></i><b>7</b> Spatial Visualizations</a><ul>
+<li class="chapter" data-level="7.1" data-path="geom-spoke.html"><a href="geom-spoke.html#data-4"><i class="fa fa-check"></i><b>7.1</b> Data</a></li>
+<li class="chapter" data-level="7.2" data-path="geom-spoke.html"><a href="geom-spoke.html#geom_spoke"><i class="fa fa-check"></i><b>7.2</b> geom_spoke</a></li>
+<li class="chapter" data-level="7.3" data-path="geom-spoke.html"><a href="geom-spoke.html#maps"><i class="fa fa-check"></i><b>7.3</b> maps</a></li>
+<li class="chapter" data-level="7.4" data-path="geom-spoke.html"><a href="geom-spoke.html#gganimate"><i class="fa fa-check"></i><b>7.4</b> gganimate</a></li>
+<li class="chapter" data-level="7.5" data-path="geom-spoke.html"><a href="geom-spoke.html#glyphs"><i class="fa fa-check"></i><b>7.5</b> glyphs</a></li>
+<li class="chapter" data-level="7.6" data-path="geom-spoke.html"><a href="geom-spoke.html#assignment-6"><i class="fa fa-check"></i><b>7.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html"><i class="fa fa-check"></i><b>8</b> geom_area and geom_ribbon</a><ul>
+<li class="chapter" data-level="8.1" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#data-5"><i class="fa fa-check"></i><b>8.1</b> Data</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#downloading-a-file-from-the-internet"><i class="fa fa-check"></i><b>8.1.1</b> Downloading a file from the internet</a></li>
+<li class="chapter" data-level="8.1.2" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#pairing-down-the-list-of-variables"><i class="fa fa-check"></i><b>8.1.2</b> Pairing down the list of variables</a></li>
+<li class="chapter" data-level="8.1.3" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#adding-more-activity-categories"><i class="fa fa-check"></i><b>8.1.3</b> Adding more activity categories</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#geom_area"><i class="fa fa-check"></i><b>8.2</b> geom_area</a></li>
+<li class="chapter" data-level="8.3" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#geom_ribbon"><i class="fa fa-check"></i><b>8.3</b> geom_ribbon</a></li>
+<li class="chapter" data-level="8.4" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#assignment-7"><i class="fa fa-check"></i><b>8.4</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="jitter-rug.html"><a href="jitter-rug.html"><i class="fa fa-check"></i><b>9</b> Jitter, Rug, and Aesthetics</a><ul>
+<li class="chapter" data-level="9.1" data-path="jitter-rug.html"><a href="jitter-rug.html#data-6"><i class="fa fa-check"></i><b>9.1</b> Data</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="jitter-rug.html"><a href="jitter-rug.html#codebook"><i class="fa fa-check"></i><b>9.1.1</b> Codebook</a></li>
+<li class="chapter" data-level="9.1.2" data-path="jitter-rug.html"><a href="jitter-rug.html#preprocessing-the-spss-file"><i class="fa fa-check"></i><b>9.1.2</b> Preprocessing the SPSS File</a></li>
+<li class="chapter" data-level="9.1.3" data-path="jitter-rug.html"><a href="jitter-rug.html#importing-with-the-spss-file-using-memisc"><i class="fa fa-check"></i><b>9.1.3</b> Importing with the SPSS file using memisc</a></li>
+<li class="chapter" data-level="9.1.4" data-path="jitter-rug.html"><a href="jitter-rug.html#transform-data"><i class="fa fa-check"></i><b>9.1.4</b> Transform Data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="jitter-rug.html"><a href="jitter-rug.html#jitter"><i class="fa fa-check"></i><b>9.2</b> Jitter</a></li>
+<li class="chapter" data-level="9.3" data-path="jitter-rug.html"><a href="jitter-rug.html#rug"><i class="fa fa-check"></i><b>9.3</b> Rug</a></li>
+<li class="chapter" data-level="9.4" data-path="jitter-rug.html"><a href="jitter-rug.html#aesthetics"><i class="fa fa-check"></i><b>9.4</b> Aesthetics</a></li>
+<li class="chapter" data-level="9.5" data-path="jitter-rug.html"><a href="jitter-rug.html#assignment-8"><i class="fa fa-check"></i><b>9.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html"><i class="fa fa-check"></i><b>10</b> Themes, Labels, and Colors</a><ul>
+<li class="chapter" data-level="10.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#data-7"><i class="fa fa-check"></i><b>10.1</b> Data</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#zillow-real-estate-data"><i class="fa fa-check"></i><b>10.1.1</b> Zillow Real Estate Data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#reshaping-data-with-tidyr"><i class="fa fa-check"></i><b>10.1.2</b> Reshaping data with <code>tidyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#starting-plot"><i class="fa fa-check"></i><b>10.2</b> Starting Plot</a></li>
+<li class="chapter" data-level="10.3" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#themes"><i class="fa fa-check"></i><b>10.3</b> Themes</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#complete-themes"><i class="fa fa-check"></i><b>10.3.1</b> Complete Themes</a></li>
+<li class="chapter" data-level="10.3.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#modifying-a-theme"><i class="fa fa-check"></i><b>10.3.2</b> Modifying a theme</a></li>
+<li class="chapter" data-level="10.3.3" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#ggthemes"><i class="fa fa-check"></i><b>10.3.3</b> <code>ggthemes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#labels"><i class="fa fa-check"></i><b>10.4</b> Labels</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#title"><i class="fa fa-check"></i><b>10.4.1</b> Title</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#colors"><i class="fa fa-check"></i><b>10.5</b> Colors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#color-scales"><i class="fa fa-check"></i><b>10.5.1</b> Color Scales</a></li>
+<li class="chapter" data-level="10.5.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#color-brewer"><i class="fa fa-check"></i><b>10.5.2</b> Color Brewer</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#assignment-9"><i class="fa fa-check"></i><b>10.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>11</b> Polar Coordinates</a><ul>
+<li class="chapter" data-level="11.1" data-path="polar.html"><a href="polar.html#data-8"><i class="fa fa-check"></i><b>11.1</b> Data</a><ul>
+<li class="chapter" data-level="" data-path="polar.html"><a href="polar.html#survey-of-consumers"><i class="fa fa-check"></i>Survey of Consumers</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="polar.html"><a href="polar.html#simple-time-series"><i class="fa fa-check"></i><b>11.2</b> Simple Time Series</a></li>
+<li class="chapter" data-level="11.3" data-path="polar.html"><a href="polar.html#stacked-periods"><i class="fa fa-check"></i><b>11.3</b> Stacked Periods</a></li>
+<li class="chapter" data-level="11.4" data-path="polar.html"><a href="polar.html#polar-coordinates"><i class="fa fa-check"></i><b>11.4</b> Polar Coordinates</a></li>
+<li class="chapter" data-level="11.5" data-path="polar.html"><a href="polar.html#assignment-10"><i class="fa fa-check"></i><b>11.5</b> Assignment</a></li>
+<li class="chapter" data-level="11.6" data-path="polar.html"><a href="polar.html#data-attribution"><i class="fa fa-check"></i><b>11.6</b> Data Attribution</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>12</b> Text Analysis</a><ul>
+<li class="chapter" data-level="12.1" data-path="nlp.html"><a href="nlp.html#data-9"><i class="fa fa-check"></i><b>12.1</b> Data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="nlp.html"><a href="nlp.html#twitter"><i class="fa fa-check"></i><b>12.1.1</b> Twitter</a></li>
+<li class="chapter" data-level="12.1.2" data-path="nlp.html"><a href="nlp.html#setting-up-twitter"><i class="fa fa-check"></i><b>12.1.2</b> Setting up twitteR</a></li>
+<li class="chapter" data-level="12.1.3" data-path="nlp.html"><a href="nlp.html#finding-tweets"><i class="fa fa-check"></i><b>12.1.3</b> Finding tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="nlp.html"><a href="nlp.html#tidytext"><i class="fa fa-check"></i><b>12.2</b> Tidytext</a></li>
+<li class="chapter" data-level="12.3" data-path="nlp.html"><a href="nlp.html#n-grams"><i class="fa fa-check"></i><b>12.3</b> N-grams</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="nlp.html"><a href="nlp.html#skip-n-grams"><i class="fa fa-check"></i><b>12.3.1</b> Skip N-grams</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="nlp.html"><a href="nlp.html#assignment-11"><i class="fa fa-check"></i><b>12.4</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="networks.html"><a href="networks.html"><i class="fa fa-check"></i><b>13</b> Networks</a><ul>
+<li class="chapter" data-level="13.1" data-path="networks.html"><a href="networks.html#data-10"><i class="fa fa-check"></i><b>13.1</b> Data</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="networks.html"><a href="networks.html#un-comtrade-database"><i class="fa fa-check"></i><b>13.1.1</b> UN Comtrade Database</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="networks.html"><a href="networks.html#geomnet"><i class="fa fa-check"></i><b>13.2</b> Geomnet</a></li>
+<li class="chapter" data-level="13.3" data-path="networks.html"><a href="networks.html#ggnetwork"><i class="fa fa-check"></i><b>13.3</b> ggnetwork</a></li>
+<li class="chapter" data-level="13.4" data-path="networks.html"><a href="networks.html#nodevertex-summary"><i class="fa fa-check"></i><b>13.4</b> Node/Vertex Summary</a></li>
+<li class="chapter" data-level="13.5" data-path="networks.html"><a href="networks.html#assignment-12"><i class="fa fa-check"></i><b>13.5</b> Assignment</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="networks.html"><a href="networks.html#download-a-new-dataset"><i class="fa fa-check"></i><b>13.5.1</b> Download a new dataset</a></li>
+<li class="chapter" data-level="13.5.2" data-path="networks.html"><a href="networks.html#create-a-visualization"><i class="fa fa-check"></i><b>13.5.2</b> Create a visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="log.html"><a href="log.html"><i class="fa fa-check"></i><b>14</b> Log scales</a><ul>
+<li class="chapter" data-level="14.1" data-path="log.html"><a href="log.html#basic-log-review"><i class="fa fa-check"></i><b>14.1</b> Basic Log Review</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="log.html"><a href="log.html#order-of-magnitude"><i class="fa fa-check"></i><b>14.1.1</b> Order of magnitude</a></li>
+<li class="chapter" data-level="14.1.2" data-path="log.html"><a href="log.html#percent-change"><i class="fa fa-check"></i><b>14.1.2</b> Percent change</a></li>
+<li class="chapter" data-level="14.1.3" data-path="log.html"><a href="log.html#histogram-comparison"><i class="fa fa-check"></i><b>14.1.3</b> Histogram comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="log.html"><a href="log.html#data-11"><i class="fa fa-check"></i><b>14.2</b> Data</a></li>
+<li class="chapter" data-level="14.3" data-path="log.html"><a href="log.html#logs-in-position"><i class="fa fa-check"></i><b>14.3</b> Logs in position</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="log.html"><a href="log.html#population-size-and-agi-per-capita"><i class="fa fa-check"></i><b>14.3.1</b> Population size and AGI per capita</a></li>
+<li class="chapter" data-level="14.3.2" data-path="log.html"><a href="log.html#histogram-comparison-1"><i class="fa fa-check"></i><b>14.3.2</b> Histogram comparison</a></li>
+<li class="chapter" data-level="14.3.3" data-path="log.html"><a href="log.html#taxes-and-farms"><i class="fa fa-check"></i><b>14.3.3</b> Taxes and Farms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="log.html"><a href="log.html#logs-in-color"><i class="fa fa-check"></i><b>14.4</b> Logs in color</a></li>
+<li class="chapter" data-level="14.5" data-path="log.html"><a href="log.html#assignment-13"><i class="fa fa-check"></i><b>14.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cross-setion.html"><a href="cross-setion.html"><i class="fa fa-check"></i><b>15</b> Cross-Section Modeling</a><ul>
+<li class="chapter" data-level="15.1" data-path="cross-setion.html"><a href="cross-setion.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="cross-setion.html"><a href="cross-setion.html#data-12"><i class="fa fa-check"></i><b>15.2</b> Data</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="cross-setion.html"><a href="cross-setion.html#layout"><i class="fa fa-check"></i><b>15.2.1</b> Layout</a></li>
+<li class="chapter" data-level="15.2.2" data-path="cross-setion.html"><a href="cross-setion.html#data-dictionary"><i class="fa fa-check"></i><b>15.2.2</b> Data Dictionary</a></li>
+<li class="chapter" data-level="15.2.3" data-path="cross-setion.html"><a href="cross-setion.html#the-2015-national-survey-of-college-graduates"><i class="fa fa-check"></i><b>15.2.3</b> The 2015 National Survey of College Graduates</a></li>
+<li class="chapter" data-level="15.2.4" data-path="cross-setion.html"><a href="cross-setion.html#variable-definitions"><i class="fa fa-check"></i><b>15.2.4</b> Variable Definitions</a></li>
+<li class="chapter" data-level="15.2.5" data-path="cross-setion.html"><a href="cross-setion.html#trainingvalidationtest-sets"><i class="fa fa-check"></i><b>15.2.5</b> Training/Validation/Test Sets</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="cross-setion.html"><a href="cross-setion.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>15.3</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="15.4" data-path="cross-setion.html"><a href="cross-setion.html#simple-linear-model"><i class="fa fa-check"></i><b>15.4</b> Simple linear model</a></li>
+<li class="chapter" data-level="15.5" data-path="cross-setion.html"><a href="cross-setion.html#model-selection"><i class="fa fa-check"></i><b>15.5</b> Model selection</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="cross-setion.html"><a href="cross-setion.html#model-alternatives"><i class="fa fa-check"></i><b>15.5.1</b> Model alternatives</a></li>
+<li class="chapter" data-level="15.5.2" data-path="cross-setion.html"><a href="cross-setion.html#comparing-model-performance"><i class="fa fa-check"></i><b>15.5.2</b> Comparing model performance</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="cross-setion.html"><a href="cross-setion.html#predictions-from-the-selected-model"><i class="fa fa-check"></i><b>15.6</b> Predictions from the selected model</a></li>
+<li class="chapter" data-level="15.7" data-path="cross-setion.html"><a href="cross-setion.html#assignment-14"><i class="fa fa-check"></i><b>15.7</b> Assignment</a></li>
+<li class="chapter" data-level="15.8" data-path="cross-setion.html"><a href="cross-setion.html#see-also"><i class="fa fa-check"></i><b>15.8</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>16</b> Time-Series Modeling</a><ul>
+<li class="chapter" data-level="16.1" data-path="time-series.html"><a href="time-series.html#introduction-1"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="time-series.html"><a href="time-series.html#data-13"><i class="fa fa-check"></i><b>16.2</b> Data</a></li>
+<li class="chapter" data-level="16.3" data-path="time-series.html"><a href="time-series.html#hold-out-set"><i class="fa fa-check"></i><b>16.3</b> Hold-Out Set</a></li>
+<li class="chapter" data-level="16.4" data-path="time-series.html"><a href="time-series.html#gdp"><i class="fa fa-check"></i><b>16.4</b> GDP</a></li>
+<li class="chapter" data-level="16.5" data-path="time-series.html"><a href="time-series.html#autoregressive-model"><i class="fa fa-check"></i><b>16.5</b> Autoregressive Model</a><ul>
+<li class="chapter" data-level="16.5.1" data-path="time-series.html"><a href="time-series.html#ar-performance"><i class="fa fa-check"></i><b>16.5.1</b> AR Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="16.6" data-path="time-series.html"><a href="time-series.html#arima"><i class="fa fa-check"></i><b>16.6</b> ARIMA</a><ul>
+<li class="chapter" data-level="16.6.1" data-path="time-series.html"><a href="time-series.html#arima-performance"><i class="fa fa-check"></i><b>16.6.1</b> ARIMA Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="16.7" data-path="time-series.html"><a href="time-series.html#vector-autoregression"><i class="fa fa-check"></i><b>16.7</b> Vector Autoregression</a></li>
+<li class="chapter" data-level="16.8" data-path="time-series.html"><a href="time-series.html#assignment-15"><i class="fa fa-check"></i><b>16.8</b> Assignment</a></li>
+</ul></li>
+<li class="part"><span><b>II Topics</b></span></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i>Data Sources Overview</a><ul>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#macro-data"><i class="fa fa-check"></i>Macro Data</a><ul>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#us"><i class="fa fa-check"></i>US</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#other-us"><i class="fa fa-check"></i>Other US</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#micro-data"><i class="fa fa-check"></i>Micro Data</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#hawaii-data"><i class="fa fa-check"></i>Hawaii Data</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#collections-of-data-lists"><i class="fa fa-check"></i>Collections of data lists</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html"><i class="fa fa-check"></i>Anscombe’s Quartet</a><ul>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#prep-the-data"><i class="fa fa-check"></i>Prep the data</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#numeric-summary"><i class="fa fa-check"></i>Numeric summary</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#visual-summary"><i class="fa fa-check"></i>Visual summary</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#the-datasaurus-dozen"><i class="fa fa-check"></i>The Datasaurus Dozen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i>Probability</a><ul>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#hot-hands"><i class="fa fa-check"></i>Hot Hands</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#saving-your-code"><i class="fa fa-check"></i>Saving your code</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#getting-started"><i class="fa fa-check"></i>Getting Started</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#compared-to-what"><i class="fa fa-check"></i>Compared to What?</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#simulations-in-r"><i class="fa fa-check"></i>Simulations in R</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#simulating-the-independent-shooter"><i class="fa fa-check"></i>Simulating the Independent Shooter</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#on-your-own"><i class="fa fa-check"></i>On your own</a><ul>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#comparing-kobe-bryant-to-the-independent-shooter"><i class="fa fa-check"></i>Comparing Kobe Bryant to the Independent Shooter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i>Distributions</a><ul>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#the-data"><i class="fa fa-check"></i>The Data</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#the-normal-distribution"><i class="fa fa-check"></i>The normal distribution</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#evaluating-the-normal-distribution"><i class="fa fa-check"></i>Evaluating the normal distribution</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#normal-probabilities"><i class="fa fa-check"></i>Normal probabilities</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#on-your-own-1"><i class="fa fa-check"></i>On Your Own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="trifecta.html"><a href="trifecta.html"><i class="fa fa-check"></i>How to Judge Visualizations</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i>Intro to Inference</a><ul>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#the-data-1"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#the-unknown-sampling-distribution"><i class="fa fa-check"></i>The unknown sampling distribution</a></li>
+<li><a href="inference.html#interlude-the-for-loop">Interlude: The <code>for</code> loop</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#sample-size-and-the-sampling-distribution"><i class="fa fa-check"></i>Sample size and the sampling distribution</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#on-your-own-2"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i>Confidence Intervals</a><ul>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#sampling-from-ames-iowa"><i class="fa fa-check"></i>Sampling from Ames, Iowa</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-data-2"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals"><i class="fa fa-check"></i>Confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-levels"><i class="fa fa-check"></i>Confidence levels</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-your-own-3"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html"><i class="fa fa-check"></i>Inference for Numerical Data</a><ul>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#north-carolina-births"><i class="fa fa-check"></i>North Carolina births</a></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li><a href="inference-numerical.html#stats-package"><code>stats</code> package</a></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#on-your-own-4"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html"><i class="fa fa-check"></i>Inference for Categorical Data</a><ul>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#the-survey"><i class="fa fa-check"></i>The survey</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#the-data-3"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#inference-on-proportions"><i class="fa fa-check"></i>Inference on proportions</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#how-does-the-proportion-affect-the-margin-of-error"><i class="fa fa-check"></i>How does the proportion affect the margin of error?</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#success-failure-condition"><i class="fa fa-check"></i>Success-failure condition</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#on-your-own-5"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i>Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#batter-up"><i class="fa fa-check"></i>Batter up</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#the-data-4"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#sum-of-squared-residuals"><i class="fa fa-check"></i>Sum of squared residuals</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#the-linear-model"><i class="fa fa-check"></i>The linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction-and-prediction-errors"><i class="fa fa-check"></i>Prediction and prediction errors</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#model-diagnostics"><i class="fa fa-check"></i>Model diagnostics</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#on-your-own-6"><i class="fa fa-check"></i>On Your Own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i>Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#grading-the-professor"><i class="fa fa-check"></i>Grading the professor</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#the-data-5"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#exploring-the-data"><i class="fa fa-check"></i>Exploring the data</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i>Simple linear regression</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple linear regression</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#the-search-for-the-best-model"><i class="fa fa-check"></i>The search for the best model</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inference" class="section level1 unnumbered">
+<h1>Intro to Inference</h1>
+<blockquote>
+<p>The source for this topic is the Open Intro labs <a href="https://www.openintro.org/stat/labs.php" class="uri">https://www.openintro.org/stat/labs.php</a></p>
+</blockquote>
+<p>In this lab, we investigate the ways in which the statistics from a random sample of data can serve as point estimates for population parameters. We’re interested in formulating a <em>sampling distribution</em> of our estimate in order to learn about the properties of the estimate, such as its distribution.</p>
+<div id="the-data-1" class="section level2 unnumbered">
+<h2>The data</h2>
+<p>We consider real estate data from the city of Ames, Iowa. The details of every real estate transaction in Ames is recorded by the City Assessor’s office. Our particular focus for this lab will be all residential home sales in Ames between 2006 and 2010. This collection represents our population of interest. In this lab we would like to learn about these home sales by taking smaller samples from the full population. Let’s load the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/ames.RData&quot;</span>)</code></pre></div>
+<p>We see that there are quite a few variables in the data set, enough to do a very in-depth analysis. For this lab, we’ll restrict our attention to just two of the variables: the above ground living area of the house in square feet (<code>Gr.Liv.Area</code>) and the sale price (<code>SalePrice</code>). To save some effort throughout the lab, create two variables with short names that represent these two variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">area &lt;-<span class="st"> </span>ames$Gr.Liv.Area
+price &lt;-<span class="st"> </span>ames$SalePrice</code></pre></div>
+<p>Let’s look at the distribution of area in our population of home sales by calculating a few summary statistics and making a histogram.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(area)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     334    1126    1442    1500    1743    5642</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(area)</code></pre></div>
+<p><img src="26-inference_files/figure-html/inference-area-hist-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li>Describe this population distribution.</li>
+</ol>
+</div>
+<div id="the-unknown-sampling-distribution" class="section level2 unnumbered">
+<h2>The unknown sampling distribution</h2>
+<p>In this lab we have access to the entire population, but this is rarely the case in real life. Gathering information on an entire population is often extremely costly or impossible. Because of this, we often take a sample of the population and use that to understand the properties of the population.</p>
+<p>If we were interested in estimating the mean living area in Ames based on a sample, we can use the following command to survey the population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">samp1 &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)</code></pre></div>
+<p>This command collects a simple random sample of size 50 from the vector <code>area</code>, which is assigned to <code>samp1</code>. This is like going into the City Assessor’s database and pulling up the files on 50 random home sales. Working with these 50 files would be considerably simpler than working with all 2930 home sales.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Describe the distribution of this sample. How does it compare to the distribution of the population?</li>
+</ol>
+<p>If we’re interested in estimating the average living area in homes in Ames using the sample, our best single guess is the sample mean.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(samp1)</code></pre></div>
+<pre><code>## [1] 1594.74</code></pre>
+<p>Depending on which 50 homes you selected, your estimate could be a bit above or a bit below the true population mean of 1499.69 square feet. In general, though, the sample mean turns out to be a pretty good estimate of the average living area, and we were able to get it by sampling less than 3% of the population.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Take a second sample, also of size 50, and call it <code>samp2</code>. How does the mean of <code>samp2</code> compare with the mean of <code>samp1</code>? Suppose we took two more samples, one of size 100 and one of size 1000. Which would you think would provide a more accurate estimate of the population mean?</li>
+</ol>
+<p>Not surprisingly, every time we take another random sample, we get a different sample mean. It’s useful to get a sense of just how much variability we should expect when estimating the population mean this way. The distribution of sample means, called the <em>sampling distribution</em>, can help us understand this variability. In this lab, because we have access to the population, we can build up the sampling distribution for the sample mean by repeating the above steps many times. Here we will generate 5000 samples and compute the sample mean of each.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
+
+for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
+   samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+   sample_means50[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+   }
+
+<span class="kw">hist</span>(sample_means50)</code></pre></div>
+<p><img src="26-inference_files/figure-html/inference-loop-1.png" width="672" /></p>
+<p>If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the <code>breaks</code> argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(sample_means50, <span class="dt">breaks =</span> <span class="dv">25</span>)</code></pre></div>
+<p><img src="26-inference_files/figure-html/inference-hist-breaks-1.png" width="672" /></p>
+<p>Here we use R to take 5000 samples of size 50 from the population, calculate the mean of each sample, and store each result in a vector called <code>sample_means50</code>. On the next page, we’ll review how this set of code works.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>How many elements are there in <code>sample_means50</code>? Describe the sampling distribution, and be sure to specifically note its center. Would you expect the distribution to change if we instead collected 50,000 sample means?</li>
+</ol>
+</div>
+<div id="interlude-the-for-loop" class="section level2 unnumbered">
+<h2>Interlude: The <code>for</code> loop</h2>
+<p>Let’s take a break from the statistics for a moment to let that last block of code sink in. You have just run your first <code>for</code> loop, a cornerstone of computer programming. The idea behind the for loop is <em>iteration</em>: it allows you to execute code as many times as you want without having to type out every iteration. In the case above, we wanted to iterate the two lines of code inside the curly braces that take a random sample of size 50 from <code>area</code> then save the mean of that sample into the <code>sample_means50</code> vector. Without the <code>for</code> loop, this would be painful:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
+
+samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+sample_means50[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+
+samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+sample_means50[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+
+samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+sample_means50[<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+
+samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+sample_means50[<span class="dv">4</span>] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)</code></pre></div>
+<p>and so on…</p>
+<p>With the for loop, these thousands of lines of code are compressed into a handful of lines. We’ve added one extra line to the code below, which prints the variable <code>i</code> during each iteration of the <code>for</code> loop. Run this code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_means50 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
+
+for(i in <span class="dv">1</span>:<span class="dv">5000</span>) {
+   samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">50</span>)
+   sample_means50[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+   <span class="co">#print(i)</span>
+}</code></pre></div>
+<p>Let’s consider this code line by line to figure out what it does. In the first line we <em>initialized a vector</em>. In this case, we created a vector of 5000 zeros called <code>sample_means50</code>. This vector will will store values generated within the <code>for</code> loop.</p>
+<p>The second line calls the <code>for</code> loop itself. The syntax can be loosely read as, “for every element <code>i</code> from 1 to 5000, run the following lines of code”. You can think of <code>i</code> as the counter that keeps track of which loop you’re on. Therefore, more precisely, the loop will run once when <code>i = 1</code>, then once when <code>i = 2</code>, and so on up to <code>i = 5000</code>.</p>
+<p>The body of the <code>for</code> loop is the part inside the curly braces, and this set of code is run for each value of <code>i</code>. Here, on every loop, we take a random sample of size 50 from <code>area</code>, take its mean, and store it as the <span class="math inline">\(i\)</span><sup>th</sup> element of <code>sample_means50</code>.</p>
+<p>In order to display that this is really happening, we asked R to print <code>i</code> at each iteration. This line of code is optional and is only used for displaying what’s going on while the <code>for</code> loop is running.</p>
+<p>The <code>for</code> loop allows us to not just run the code 5000 times, but to neatly package the results, element by element, into the empty vector that we initialized at the outset.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>To make sure you understand what you’ve done in this loop, try running a smaller version. Initialize a vector of 100 zeros called <code>sample_means_small</code>. Run a loop that takes a sample of size 50 from <code>area</code> and stores the sample mean in <code>sample_means_small</code>, but only iterate from 1 to 100. Print the output to your screen (type <code>sample_means_small</code> into the console and press enter). How many elements are there in this object called <code>sample_means_small</code>? What does each element represent?</li>
+</ol>
+</div>
+<div id="sample-size-and-the-sampling-distribution" class="section level2 unnumbered">
+<h2>Sample size and the sampling distribution</h2>
+<p>Mechanics aside, let’s return to the reason we used a <code>for</code> loop: to compute a sampling distribution, specifically, this one.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(sample_means50)</code></pre></div>
+<p><img src="26-inference_files/figure-html/inference-hist-1.png" width="672" /></p>
+<p>The sampling distribution that we computed tells us much about estimating the average living area in homes in Ames. Because the sample mean is an unbiased estimator, the sampling distribution is centered at the true average living area of the the population, and the spread of the distribution indicates how much variability is induced by sampling only 50 home sales.</p>
+<p>To get a sense of the effect that sample size has on our distribution, let’s build up two more sampling distributions: one based on a sample size of 10 and another based on a sample size of 100.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_means10 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
+sample_means100 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="dv">5000</span>)
+
+for(i in <span class="dv">1</span>:<span class="dv">5000</span>){
+  samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">10</span>)
+  sample_means10[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+  samp &lt;-<span class="st"> </span><span class="kw">sample</span>(area, <span class="dv">100</span>)
+  sample_means100[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(samp)
+}</code></pre></div>
+<p>Here we’re able to use a single <code>for</code> loop to build two distributions by adding additional lines inside the curly braces. Don’t worry about the fact that <code>samp</code> is used for the name of two different objects. In the second command of the <code>for</code> loop, the mean of <code>samp</code> is saved to the relevant place in the vector <code>sample_means10</code>. With the mean saved, we’re now free to overwrite the object <code>samp</code> with a new sample, this time of size 100. In general, anytime you create an object using a name that is already in use, the old object will get replaced with the new one.</p>
+<p>To see the effect that different sample sizes have on the sampling distribution, plot the three distributions on top of one another.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))
+
+xlimits &lt;-<span class="st"> </span><span class="kw">range</span>(sample_means10)
+
+<span class="kw">hist</span>(sample_means10, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">xlim =</span> xlimits)
+<span class="kw">hist</span>(sample_means50, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">xlim =</span> xlimits)
+<span class="kw">hist</span>(sample_means100, <span class="dt">breaks =</span> <span class="dv">20</span>, <span class="dt">xlim =</span> xlimits)</code></pre></div>
+<p><img src="26-inference_files/figure-html/inference-plot-samps-1.png" width="672" /></p>
+<p>The first command specifies that you’d like to divide the plotting area into 3 rows and 1 column of plots (to return to the default setting of plotting one at a time, use <code>par(mfrow = c(1, 1))</code>). The <code>breaks</code> argument specifies the number of bins used in constructing the histogram. The <code>xlim</code> argument specifies the range of the x-axis of the histogram, and by setting it equal to <code>xlimits</code> for each histogram, we ensure that all three histograms will be plotted with the same limits on the x-axis.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>When the sample size is larger, what happens to the center? What about the spread?</li>
+</ol>
+<hr />
+</div>
+<div id="on-your-own-2" class="section level2 unnumbered">
+<h2>On your own</h2>
+<p>So far, we have only focused on estimating the mean living area in homes in Ames. Now you’ll try to estimate the mean home price.</p>
+<ul>
+<li><p>Take a random sample of size 50 from <code>price</code>. Using this sample, what is your best point estimate of the population mean?</p></li>
+<li><p>Since you have access to the population, simulate the sampling distribution for <span class="math inline">\(\bar{x}_{price}\)</span> by taking 5000 samples from the population of size 50 and computing 5000 sample means. Store these means in a vector called <code>sample_means50</code>. Plot the data, then describe the shape of this sampling distribution. Based on this sampling distribution, what would you guess the mean home price of the population to be? Finally, calculate and report the population mean.</p></li>
+<li><p>Change your sample size from 50 to 150, then compute the sampling distribution using the same method as above, and store these means in a new vector called <code>sample_means150</code>. Describe the shape of this sampling distribution, and compare it to the sampling distribution for a sample size of 50. Based on this sampling distribution, what would you guess to be the mean sale price of homes in Ames?</p></li>
+<li><p>Of the sampling distributions from 2 and 3, which has a smaller spread? If we’re concerned with making estimates that are more often close to the true value, would we prefer a distribution with a large or small spread?</p></li>
+</ul>
+<div id="license">
+<p>This is a product of OpenIntro that is released under a <a href="http://creativecommons.org/licenses/by-sa/3.0">Creative Commons Attribution-ShareAlike 3.0 Unported</a>. This lab was written for OpenIntro by Andrew Bray and Mine Çetinkaya-Rundel.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="trifecta.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="confidence-intervals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jonpage/r-course/edit/master/26-inference.Rmd",
+"text": "Edit"
+},
+"download": ["jonpage-r-course.pdf", "jonpage-r-course.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

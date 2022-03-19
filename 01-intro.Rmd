@@ -1,0 +1,130 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# (PART) R Tutorials {-} 
+
+# R Basics {#intro}
+
+Before we begin, make sure you have [R](https://cran.r-project.org/) and 
+[RStudio](https://www.rstudio.com/products/rstudio/download3/#download) installed.
+
+## R Markdown
+
+Throughout this course, [R Markdown](http://rmarkdown.rstudio.com/lesson-1.html) will make our lives easier. Make sure that the `rmarkdown` library is installed:
+
+```
+install.packages("rmarkdown")
+```
+
+For each assignment, you will create an R Markdown file (*.Rmd) and submit that file by the following class session using [classroom.google.com](https://classroom.google.com). Each class
+has been made using R Markdown, so you can find many examples by going to the GitHub repository
+for this course [github.com/jonpage/r-course](https://github.com/jonpage/r-course)
+
+## Working with data already loaded into R
+
+Base R comes with a set of sample data that is useful for illustrating techniques in R.
+Run the following command to see a list of the datasets in the core library `datasets`:
+
+```
+library(help = "datasets")
+```
+
+These datasets are accessible automatically. We'll start with the Swiss Fertility and Socioeconomic Inicators (1888) dataset. See a description of the dataset by using the help command, either `?swiss` or `help(swiss)`. This dataset is technically a `data.frame`, which you can see by using the command `class(swiss)`. For more information on `data.frame`s take a look at the documentation(`help(data.frame)`)
+
+### Numeric summaries
+
+Here are a few ways we can summarize a dataset:
+
+`head()` shows us the first six rows of a `data.frame`.
+```{r into-head}
+head(swiss)
+```
+
+`summary()` provides summary statistics for each column in a `data.frame`.
+```{r intro-summary}
+summary(swiss)
+```
+
+### Visual summaries
+
+Scatterplot matrix (default plot of a data.frame):
+```
+plot(swiss)
+# or
+pairs(swiss)
+```
+```{r intro-plot, echo=FALSE}
+plot(swiss)
+```
+
+Scatterplot of two dimensions
+```
+plot(swiss[,c("Education", "Fertility")])
+# or
+plot(swiss[4,1])
+# or
+plot(swiss$Education, swiss$Fertility)
+# or
+plot(swiss$Fertility ~ swiss$Education)
+```
+```{r intro-cross-plot, echo=FALSE}
+plot(swiss$Fertility ~ swiss$Education)
+```
+
+Smoothed Scatterplot of two dimensions
+```{r intro-smooth-scatter}
+smoothScatter(swiss$Fertility ~ swiss$Examination)
+```
+
+Scatterplot with a `loess` (locally weighted polynomial regression)
+```{r intro-smooth}
+scatter.smooth(swiss$Fertility ~ swiss$Agriculture)
+```
+
+### Distribution plots
+
+Histograms:
+```{r intro-hist}
+hist(swiss$Catholic)
+```
+
+Stem-and-Leaf Plots:
+```{r intro-stem}
+stem(swiss$Fertility)
+```
+
+Kernel density plot (and add a rug showing where observation occur):
+```{r intro-rug}
+plot(density(swiss$Fertility))
+rug(swiss$Fertility)
+```
+
+Boxplots:
+```{r intro-boxplot}
+boxplot(swiss)
+```
+
+
+#### More complicated charts
+Conditioning plots:
+```{r intro-coplot}
+coplot(swiss$Fertility ~ swiss$Examination | as.factor(swiss$Catholic > 50))
+```
+
+Star plots (half-star plots here):
+```{r intro-star}
+stars(swiss, key.loc = c(15,1), flip.labels = FALSE, full = FALSE)
+```
+
+## Assignment
+
+Create a new R Markdown file. 
+
+Choose a dataset from `datasets` (`library(help = "datasets")` will show you a list) and create 5 charts in an R Markdown file from the example charts above. Run the following command to see what else is available in the base R graphics package:
+
+```
+demo(graphics)
+```

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Data Analysis and Visualization</title>
+  <meta name="description" content="This is a course on using R focused on data analysis and visualization through case studies.">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Data Analysis and Visualization" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a course on using R focused on data analysis and visualization through case studies." />
+  <meta name="github-repo" content="jonpage/r-course" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Data Analysis and Visualization" />
+  
+  <meta name="twitter:description" content="This is a course on using R focused on data analysis and visualization through case studies." />
+  
+
+<meta name="author" content="Jonathan Page">
+
+
+<meta name="date" content="2017-11-12">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="networks.html">
+<link rel="next" href="cross-setion.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; background-color: #dddddd; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { font-weight: bold; } /* Keyword */
+code > span.dt { color: #800000; } /* DataType */
+code > span.dv { color: #0000ff; } /* DecVal */
+code > span.bn { color: #0000ff; } /* BaseN */
+code > span.fl { color: #800080; } /* Float */
+code > span.ch { color: #ff00ff; } /* Char */
+code > span.st { color: #dd0000; } /* String */
+code > span.co { color: #808080; font-style: italic; } /* Comment */
+code > span.al { color: #00ff00; font-weight: bold; } /* Alert */
+code > span.fu { color: #000080; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #ff0000; font-weight: bold; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #ff00ff; } /* SpecialChar */
+code > span.vs { color: #dd0000; } /* VerbatimString */
+code > span.ss { color: #dd0000; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #808080; font-style: italic; } /* Documentation */
+code > span.an { color: #808080; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #808080; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #808080; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Data Analysis and Visualization</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Syllabus</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hours"><i class="fa fa-check"></i>Office Hours</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#student-learning-objectives"><i class="fa fa-check"></i>Student Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i>Resources</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#required"><i class="fa fa-check"></i>Required</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#recommended"><i class="fa fa-check"></i>Recommended:</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-requirements"><i class="fa fa-check"></i>Course Requirements</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#weekly-assignments-30"><i class="fa fa-check"></i>Weekly assignments (30%)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#individual-project"><i class="fa fa-check"></i>Individual Project</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#project-assignments-30"><i class="fa fa-check"></i>Project assignments (30%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#project-proposal-presentation-5"><i class="fa fa-check"></i>Project proposal presentation (5%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#final-project-20"><i class="fa fa-check"></i>Final project (20%)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#final-project-presentation-participation-15"><i class="fa fa-check"></i>Final project presentation participation (15%)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-1"><i class="fa fa-check"></i>Week 1</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-2"><i class="fa fa-check"></i>Week 2</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-3"><i class="fa fa-check"></i>Week 3</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-4"><i class="fa fa-check"></i>Week 4</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-5"><i class="fa fa-check"></i>Week 5</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-6"><i class="fa fa-check"></i>Week 6</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-7"><i class="fa fa-check"></i>Week 7</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-8"><i class="fa fa-check"></i>Week 8</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-9"><i class="fa fa-check"></i>Week 9</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-10"><i class="fa fa-check"></i>Week 10</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-11"><i class="fa fa-check"></i>Week 11</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-12"><i class="fa fa-check"></i>Week 12</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-13"><i class="fa fa-check"></i>Week 13</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-14"><i class="fa fa-check"></i>Week 14</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-15"><i class="fa fa-check"></i>Week 15</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#week-16"><i class="fa fa-check"></i>Week 16</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other Resources</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#statistics"><i class="fa fa-check"></i>Statistics</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#courses"><i class="fa fa-check"></i>Courses</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#papers"><i class="fa fa-check"></i>Papers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html"><i class="fa fa-check"></i>Weekly Assignments</a><ul>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html#creating-the-r-markdown-files"><i class="fa fa-check"></i>Creating the R Markdown files</a></li>
+<li class="chapter" data-level="" data-path="weekly-assignments.html"><a href="weekly-assignments.html#submitting-your-assignment"><i class="fa fa-check"></i>Submitting your assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html"><i class="fa fa-check"></i>Individual Project</a><ul>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#project-assignments"><i class="fa fa-check"></i>Project assignments</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#project-proposal-presentation"><i class="fa fa-check"></i>Project proposal presentation</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#final-project-rmarkdown"><i class="fa fa-check"></i>Final project RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="individual-project-1.html"><a href="individual-project-1.html#final-project-presentation-participation"><i class="fa fa-check"></i>Final project presentation participation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html"><i class="fa fa-check"></i>Final Project Rubric</a><ul>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-introduction-10"><i class="fa fa-check"></i>Section: Introduction (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-data-10"><i class="fa fa-check"></i>Section: Data (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-analysis-and-results-30"><i class="fa fa-check"></i>Section: Analysis and Results (30%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#section-conclusion-10"><i class="fa fa-check"></i>Section: Conclusion (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-organization-10"><i class="fa fa-check"></i>General: Organization (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-grammar-10"><i class="fa fa-check"></i>General: Grammar (10%)</a></li>
+<li class="chapter" data-level="" data-path="final-project-rubric.html"><a href="final-project-rubric.html#general-code-20"><i class="fa fa-check"></i>General: Code (20%)</a></li>
+</ul></li>
+<li class="part"><span><b>I R Tutorials</b></span></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> R Basics</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#r-markdown"><i class="fa fa-check"></i><b>1.1</b> R Markdown</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#working-with-data-already-loaded-into-r"><i class="fa fa-check"></i><b>1.2</b> Working with data already loaded into R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#numeric-summaries"><i class="fa fa-check"></i><b>1.2.1</b> Numeric summaries</a></li>
+<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#visual-summaries"><i class="fa fa-check"></i><b>1.2.2</b> Visual summaries</a></li>
+<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#distribution-plots"><i class="fa fa-check"></i><b>1.2.3</b> Distribution plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#assignment"><i class="fa fa-check"></i><b>1.3</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="read-data.html"><a href="read-data.html"><i class="fa fa-check"></i><b>2</b> Reading data</a><ul>
+<li class="chapter" data-level="2.1" data-path="read-data.html"><a href="read-data.html#data-source"><i class="fa fa-check"></i><b>2.1</b> Data Source:</a></li>
+<li class="chapter" data-level="2.2" data-path="read-data.html"><a href="read-data.html#read_csv"><i class="fa fa-check"></i><b>2.2</b> <code>read_csv</code></a></li>
+<li class="chapter" data-level="2.3" data-path="read-data.html"><a href="read-data.html#dplyr"><i class="fa fa-check"></i><b>2.3</b> <code>dplyr</code></a></li>
+<li class="chapter" data-level="2.4" data-path="read-data.html"><a href="read-data.html#first-look-at-ggplot2"><i class="fa fa-check"></i><b>2.4</b> First Look at <code>ggplot2</code></a></li>
+<li class="chapter" data-level="2.5" data-path="read-data.html"><a href="read-data.html#heatmaps"><i class="fa fa-check"></i><b>2.5</b> Heatmaps</a></li>
+<li class="chapter" data-level="2.6" data-path="read-data.html"><a href="read-data.html#hexbins"><i class="fa fa-check"></i><b>2.6</b> Hexbins</a></li>
+<li class="chapter" data-level="2.7" data-path="read-data.html"><a href="read-data.html#other-topics-from-this-dataset"><i class="fa fa-check"></i><b>2.7</b> Other topics from this dataset</a></li>
+<li class="chapter" data-level="2.8" data-path="read-data.html"><a href="read-data.html#assignment-1"><i class="fa fa-check"></i><b>2.8</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html"><i class="fa fa-check"></i><b>3</b> Facets, Bubbles, and Transparency</a><ul>
+<li class="chapter" data-level="3.1" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#data"><i class="fa fa-check"></i><b>3.1</b> Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#importing-non-standard-excel-files"><i class="fa fa-check"></i><b>3.1.1</b> Importing non-standard Excel files</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#facets"><i class="fa fa-check"></i><b>3.2</b> Facets</a></li>
+<li class="chapter" data-level="3.3" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#bubbles"><i class="fa fa-check"></i><b>3.3</b> Bubbles</a></li>
+<li class="chapter" data-level="3.4" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#transparency"><i class="fa fa-check"></i><b>3.4</b> Transparency</a></li>
+<li class="chapter" data-level="3.5" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#facets-1"><i class="fa fa-check"></i><b>3.5</b> Facets</a></li>
+<li class="chapter" data-level="3.6" data-path="facets-and-bubbles.html"><a href="facets-and-bubbles.html#assignment-2"><i class="fa fa-check"></i><b>3.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lines.html"><a href="lines.html"><i class="fa fa-check"></i><b>4</b> Lines and Curves</a><ul>
+<li class="chapter" data-level="4.1" data-path="lines.html"><a href="lines.html#data-1"><i class="fa fa-check"></i><b>4.1</b> Data</a></li>
+<li class="chapter" data-level="4.2" data-path="lines.html"><a href="lines.html#geom_smooth"><i class="fa fa-check"></i><b>4.2</b> geom_smooth</a></li>
+<li class="chapter" data-level="4.3" data-path="lines.html"><a href="lines.html#geom_abline"><i class="fa fa-check"></i><b>4.3</b> geom_abline</a></li>
+<li class="chapter" data-level="4.4" data-path="lines.html"><a href="lines.html#geom_vline"><i class="fa fa-check"></i><b>4.4</b> geom_vline</a></li>
+<li class="chapter" data-level="4.5" data-path="lines.html"><a href="lines.html#hline"><i class="fa fa-check"></i><b>4.5</b> hline</a></li>
+<li class="chapter" data-level="4.6" data-path="lines.html"><a href="lines.html#assignment-3"><i class="fa fa-check"></i><b>4.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot-exts.html"><a href="ggplot-exts.html"><i class="fa fa-check"></i><b>5</b> Scatter Plot Matrices and Extensions</a><ul>
+<li class="chapter" data-level="5.1" data-path="ggplot-exts.html"><a href="ggplot-exts.html#data-2"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="ggplot-exts.html"><a href="ggplot-exts.html#ggplot2-extensions"><i class="fa fa-check"></i><b>5.2</b> ggplot2 extensions</a></li>
+<li class="chapter" data-level="5.3" data-path="ggplot-exts.html"><a href="ggplot-exts.html#ggjoy"><i class="fa fa-check"></i><b>5.3</b> ggjoy</a></li>
+<li class="chapter" data-level="5.4" data-path="ggplot-exts.html"><a href="ggplot-exts.html#scatterplot-matrix-ggallyggscatmat"><i class="fa fa-check"></i><b>5.4</b> scatterplot matrix (GGally::ggscatmat)</a></li>
+<li class="chapter" data-level="5.5" data-path="ggplot-exts.html"><a href="ggplot-exts.html#assignment-4"><i class="fa fa-check"></i><b>5.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html"><i class="fa fa-check"></i><b>6</b> Boxplots and Violin Plots</a><ul>
+<li class="chapter" data-level="6.1" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#data-3"><i class="fa fa-check"></i><b>6.1</b> Data</a></li>
+<li class="chapter" data-level="6.2" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#boxplots"><i class="fa fa-check"></i><b>6.2</b> Boxplots</a></li>
+<li class="chapter" data-level="6.3" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#violin-plots"><i class="fa fa-check"></i><b>6.3</b> Violin Plots</a></li>
+<li class="chapter" data-level="6.4" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#dot-plots"><i class="fa fa-check"></i><b>6.4</b> Dot Plots</a></li>
+<li class="chapter" data-level="6.5" data-path="boxplots-and-violins.html"><a href="boxplots-and-violins.html#assignment-5"><i class="fa fa-check"></i><b>6.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geom-spoke.html"><a href="geom-spoke.html"><i class="fa fa-check"></i><b>7</b> Spatial Visualizations</a><ul>
+<li class="chapter" data-level="7.1" data-path="geom-spoke.html"><a href="geom-spoke.html#data-4"><i class="fa fa-check"></i><b>7.1</b> Data</a></li>
+<li class="chapter" data-level="7.2" data-path="geom-spoke.html"><a href="geom-spoke.html#geom_spoke"><i class="fa fa-check"></i><b>7.2</b> geom_spoke</a></li>
+<li class="chapter" data-level="7.3" data-path="geom-spoke.html"><a href="geom-spoke.html#maps"><i class="fa fa-check"></i><b>7.3</b> maps</a></li>
+<li class="chapter" data-level="7.4" data-path="geom-spoke.html"><a href="geom-spoke.html#gganimate"><i class="fa fa-check"></i><b>7.4</b> gganimate</a></li>
+<li class="chapter" data-level="7.5" data-path="geom-spoke.html"><a href="geom-spoke.html#glyphs"><i class="fa fa-check"></i><b>7.5</b> glyphs</a></li>
+<li class="chapter" data-level="7.6" data-path="geom-spoke.html"><a href="geom-spoke.html#assignment-6"><i class="fa fa-check"></i><b>7.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html"><i class="fa fa-check"></i><b>8</b> geom_area and geom_ribbon</a><ul>
+<li class="chapter" data-level="8.1" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#data-5"><i class="fa fa-check"></i><b>8.1</b> Data</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#downloading-a-file-from-the-internet"><i class="fa fa-check"></i><b>8.1.1</b> Downloading a file from the internet</a></li>
+<li class="chapter" data-level="8.1.2" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#pairing-down-the-list-of-variables"><i class="fa fa-check"></i><b>8.1.2</b> Pairing down the list of variables</a></li>
+<li class="chapter" data-level="8.1.3" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#adding-more-activity-categories"><i class="fa fa-check"></i><b>8.1.3</b> Adding more activity categories</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#geom_area"><i class="fa fa-check"></i><b>8.2</b> geom_area</a></li>
+<li class="chapter" data-level="8.3" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#geom_ribbon"><i class="fa fa-check"></i><b>8.3</b> geom_ribbon</a></li>
+<li class="chapter" data-level="8.4" data-path="area-and-ribbons.html"><a href="area-and-ribbons.html#assignment-7"><i class="fa fa-check"></i><b>8.4</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="jitter-rug.html"><a href="jitter-rug.html"><i class="fa fa-check"></i><b>9</b> Jitter, Rug, and Aesthetics</a><ul>
+<li class="chapter" data-level="9.1" data-path="jitter-rug.html"><a href="jitter-rug.html#data-6"><i class="fa fa-check"></i><b>9.1</b> Data</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="jitter-rug.html"><a href="jitter-rug.html#codebook"><i class="fa fa-check"></i><b>9.1.1</b> Codebook</a></li>
+<li class="chapter" data-level="9.1.2" data-path="jitter-rug.html"><a href="jitter-rug.html#preprocessing-the-spss-file"><i class="fa fa-check"></i><b>9.1.2</b> Preprocessing the SPSS File</a></li>
+<li class="chapter" data-level="9.1.3" data-path="jitter-rug.html"><a href="jitter-rug.html#importing-with-the-spss-file-using-memisc"><i class="fa fa-check"></i><b>9.1.3</b> Importing with the SPSS file using memisc</a></li>
+<li class="chapter" data-level="9.1.4" data-path="jitter-rug.html"><a href="jitter-rug.html#transform-data"><i class="fa fa-check"></i><b>9.1.4</b> Transform Data</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="jitter-rug.html"><a href="jitter-rug.html#jitter"><i class="fa fa-check"></i><b>9.2</b> Jitter</a></li>
+<li class="chapter" data-level="9.3" data-path="jitter-rug.html"><a href="jitter-rug.html#rug"><i class="fa fa-check"></i><b>9.3</b> Rug</a></li>
+<li class="chapter" data-level="9.4" data-path="jitter-rug.html"><a href="jitter-rug.html#aesthetics"><i class="fa fa-check"></i><b>9.4</b> Aesthetics</a></li>
+<li class="chapter" data-level="9.5" data-path="jitter-rug.html"><a href="jitter-rug.html#assignment-8"><i class="fa fa-check"></i><b>9.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html"><i class="fa fa-check"></i><b>10</b> Themes, Labels, and Colors</a><ul>
+<li class="chapter" data-level="10.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#data-7"><i class="fa fa-check"></i><b>10.1</b> Data</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#zillow-real-estate-data"><i class="fa fa-check"></i><b>10.1.1</b> Zillow Real Estate Data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#reshaping-data-with-tidyr"><i class="fa fa-check"></i><b>10.1.2</b> Reshaping data with <code>tidyr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#starting-plot"><i class="fa fa-check"></i><b>10.2</b> Starting Plot</a></li>
+<li class="chapter" data-level="10.3" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#themes"><i class="fa fa-check"></i><b>10.3</b> Themes</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#complete-themes"><i class="fa fa-check"></i><b>10.3.1</b> Complete Themes</a></li>
+<li class="chapter" data-level="10.3.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#modifying-a-theme"><i class="fa fa-check"></i><b>10.3.2</b> Modifying a theme</a></li>
+<li class="chapter" data-level="10.3.3" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#ggthemes"><i class="fa fa-check"></i><b>10.3.3</b> <code>ggthemes</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#labels"><i class="fa fa-check"></i><b>10.4</b> Labels</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#title"><i class="fa fa-check"></i><b>10.4.1</b> Title</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#colors"><i class="fa fa-check"></i><b>10.5</b> Colors</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#color-scales"><i class="fa fa-check"></i><b>10.5.1</b> Color Scales</a></li>
+<li class="chapter" data-level="10.5.2" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#color-brewer"><i class="fa fa-check"></i><b>10.5.2</b> Color Brewer</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="themes-labels-colors.html"><a href="themes-labels-colors.html#assignment-9"><i class="fa fa-check"></i><b>10.6</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>11</b> Polar Coordinates</a><ul>
+<li class="chapter" data-level="11.1" data-path="polar.html"><a href="polar.html#data-8"><i class="fa fa-check"></i><b>11.1</b> Data</a><ul>
+<li class="chapter" data-level="" data-path="polar.html"><a href="polar.html#survey-of-consumers"><i class="fa fa-check"></i>Survey of Consumers</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="polar.html"><a href="polar.html#simple-time-series"><i class="fa fa-check"></i><b>11.2</b> Simple Time Series</a></li>
+<li class="chapter" data-level="11.3" data-path="polar.html"><a href="polar.html#stacked-periods"><i class="fa fa-check"></i><b>11.3</b> Stacked Periods</a></li>
+<li class="chapter" data-level="11.4" data-path="polar.html"><a href="polar.html#polar-coordinates"><i class="fa fa-check"></i><b>11.4</b> Polar Coordinates</a></li>
+<li class="chapter" data-level="11.5" data-path="polar.html"><a href="polar.html#assignment-10"><i class="fa fa-check"></i><b>11.5</b> Assignment</a></li>
+<li class="chapter" data-level="11.6" data-path="polar.html"><a href="polar.html#data-attribution"><i class="fa fa-check"></i><b>11.6</b> Data Attribution</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>12</b> Text Analysis</a><ul>
+<li class="chapter" data-level="12.1" data-path="nlp.html"><a href="nlp.html#data-9"><i class="fa fa-check"></i><b>12.1</b> Data</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="nlp.html"><a href="nlp.html#twitter"><i class="fa fa-check"></i><b>12.1.1</b> Twitter</a></li>
+<li class="chapter" data-level="12.1.2" data-path="nlp.html"><a href="nlp.html#setting-up-twitter"><i class="fa fa-check"></i><b>12.1.2</b> Setting up twitteR</a></li>
+<li class="chapter" data-level="12.1.3" data-path="nlp.html"><a href="nlp.html#finding-tweets"><i class="fa fa-check"></i><b>12.1.3</b> Finding tweets</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="nlp.html"><a href="nlp.html#tidytext"><i class="fa fa-check"></i><b>12.2</b> Tidytext</a></li>
+<li class="chapter" data-level="12.3" data-path="nlp.html"><a href="nlp.html#n-grams"><i class="fa fa-check"></i><b>12.3</b> N-grams</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="nlp.html"><a href="nlp.html#skip-n-grams"><i class="fa fa-check"></i><b>12.3.1</b> Skip N-grams</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="nlp.html"><a href="nlp.html#assignment-11"><i class="fa fa-check"></i><b>12.4</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="networks.html"><a href="networks.html"><i class="fa fa-check"></i><b>13</b> Networks</a><ul>
+<li class="chapter" data-level="13.1" data-path="networks.html"><a href="networks.html#data-10"><i class="fa fa-check"></i><b>13.1</b> Data</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="networks.html"><a href="networks.html#un-comtrade-database"><i class="fa fa-check"></i><b>13.1.1</b> UN Comtrade Database</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="networks.html"><a href="networks.html#geomnet"><i class="fa fa-check"></i><b>13.2</b> Geomnet</a></li>
+<li class="chapter" data-level="13.3" data-path="networks.html"><a href="networks.html#ggnetwork"><i class="fa fa-check"></i><b>13.3</b> ggnetwork</a></li>
+<li class="chapter" data-level="13.4" data-path="networks.html"><a href="networks.html#nodevertex-summary"><i class="fa fa-check"></i><b>13.4</b> Node/Vertex Summary</a></li>
+<li class="chapter" data-level="13.5" data-path="networks.html"><a href="networks.html#assignment-12"><i class="fa fa-check"></i><b>13.5</b> Assignment</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="networks.html"><a href="networks.html#download-a-new-dataset"><i class="fa fa-check"></i><b>13.5.1</b> Download a new dataset</a></li>
+<li class="chapter" data-level="13.5.2" data-path="networks.html"><a href="networks.html#create-a-visualization"><i class="fa fa-check"></i><b>13.5.2</b> Create a visualization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="log.html"><a href="log.html"><i class="fa fa-check"></i><b>14</b> Log scales</a><ul>
+<li class="chapter" data-level="14.1" data-path="log.html"><a href="log.html#basic-log-review"><i class="fa fa-check"></i><b>14.1</b> Basic Log Review</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="log.html"><a href="log.html#order-of-magnitude"><i class="fa fa-check"></i><b>14.1.1</b> Order of magnitude</a></li>
+<li class="chapter" data-level="14.1.2" data-path="log.html"><a href="log.html#percent-change"><i class="fa fa-check"></i><b>14.1.2</b> Percent change</a></li>
+<li class="chapter" data-level="14.1.3" data-path="log.html"><a href="log.html#histogram-comparison"><i class="fa fa-check"></i><b>14.1.3</b> Histogram comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="log.html"><a href="log.html#data-11"><i class="fa fa-check"></i><b>14.2</b> Data</a></li>
+<li class="chapter" data-level="14.3" data-path="log.html"><a href="log.html#logs-in-position"><i class="fa fa-check"></i><b>14.3</b> Logs in position</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="log.html"><a href="log.html#population-size-and-agi-per-capita"><i class="fa fa-check"></i><b>14.3.1</b> Population size and AGI per capita</a></li>
+<li class="chapter" data-level="14.3.2" data-path="log.html"><a href="log.html#histogram-comparison-1"><i class="fa fa-check"></i><b>14.3.2</b> Histogram comparison</a></li>
+<li class="chapter" data-level="14.3.3" data-path="log.html"><a href="log.html#taxes-and-farms"><i class="fa fa-check"></i><b>14.3.3</b> Taxes and Farms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="log.html"><a href="log.html#logs-in-color"><i class="fa fa-check"></i><b>14.4</b> Logs in color</a></li>
+<li class="chapter" data-level="14.5" data-path="log.html"><a href="log.html#assignment-13"><i class="fa fa-check"></i><b>14.5</b> Assignment</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cross-setion.html"><a href="cross-setion.html"><i class="fa fa-check"></i><b>15</b> Cross-Section Modeling</a><ul>
+<li class="chapter" data-level="15.1" data-path="cross-setion.html"><a href="cross-setion.html#introduction"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="cross-setion.html"><a href="cross-setion.html#data-12"><i class="fa fa-check"></i><b>15.2</b> Data</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="cross-setion.html"><a href="cross-setion.html#layout"><i class="fa fa-check"></i><b>15.2.1</b> Layout</a></li>
+<li class="chapter" data-level="15.2.2" data-path="cross-setion.html"><a href="cross-setion.html#data-dictionary"><i class="fa fa-check"></i><b>15.2.2</b> Data Dictionary</a></li>
+<li class="chapter" data-level="15.2.3" data-path="cross-setion.html"><a href="cross-setion.html#the-2015-national-survey-of-college-graduates"><i class="fa fa-check"></i><b>15.2.3</b> The 2015 National Survey of College Graduates</a></li>
+<li class="chapter" data-level="15.2.4" data-path="cross-setion.html"><a href="cross-setion.html#variable-definitions"><i class="fa fa-check"></i><b>15.2.4</b> Variable Definitions</a></li>
+<li class="chapter" data-level="15.2.5" data-path="cross-setion.html"><a href="cross-setion.html#trainingvalidationtest-sets"><i class="fa fa-check"></i><b>15.2.5</b> Training/Validation/Test Sets</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="cross-setion.html"><a href="cross-setion.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>15.3</b> Exploratory Data Analysis</a></li>
+<li class="chapter" data-level="15.4" data-path="cross-setion.html"><a href="cross-setion.html#simple-linear-model"><i class="fa fa-check"></i><b>15.4</b> Simple linear model</a></li>
+<li class="chapter" data-level="15.5" data-path="cross-setion.html"><a href="cross-setion.html#model-selection"><i class="fa fa-check"></i><b>15.5</b> Model selection</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="cross-setion.html"><a href="cross-setion.html#model-alternatives"><i class="fa fa-check"></i><b>15.5.1</b> Model alternatives</a></li>
+<li class="chapter" data-level="15.5.2" data-path="cross-setion.html"><a href="cross-setion.html#comparing-model-performance"><i class="fa fa-check"></i><b>15.5.2</b> Comparing model performance</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="cross-setion.html"><a href="cross-setion.html#predictions-from-the-selected-model"><i class="fa fa-check"></i><b>15.6</b> Predictions from the selected model</a></li>
+<li class="chapter" data-level="15.7" data-path="cross-setion.html"><a href="cross-setion.html#assignment-14"><i class="fa fa-check"></i><b>15.7</b> Assignment</a></li>
+<li class="chapter" data-level="15.8" data-path="cross-setion.html"><a href="cross-setion.html#see-also"><i class="fa fa-check"></i><b>15.8</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>16</b> Time-Series Modeling</a><ul>
+<li class="chapter" data-level="16.1" data-path="time-series.html"><a href="time-series.html#introduction-1"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="time-series.html"><a href="time-series.html#data-13"><i class="fa fa-check"></i><b>16.2</b> Data</a></li>
+<li class="chapter" data-level="16.3" data-path="time-series.html"><a href="time-series.html#hold-out-set"><i class="fa fa-check"></i><b>16.3</b> Hold-Out Set</a></li>
+<li class="chapter" data-level="16.4" data-path="time-series.html"><a href="time-series.html#gdp"><i class="fa fa-check"></i><b>16.4</b> GDP</a></li>
+<li class="chapter" data-level="16.5" data-path="time-series.html"><a href="time-series.html#autoregressive-model"><i class="fa fa-check"></i><b>16.5</b> Autoregressive Model</a><ul>
+<li class="chapter" data-level="16.5.1" data-path="time-series.html"><a href="time-series.html#ar-performance"><i class="fa fa-check"></i><b>16.5.1</b> AR Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="16.6" data-path="time-series.html"><a href="time-series.html#arima"><i class="fa fa-check"></i><b>16.6</b> ARIMA</a><ul>
+<li class="chapter" data-level="16.6.1" data-path="time-series.html"><a href="time-series.html#arima-performance"><i class="fa fa-check"></i><b>16.6.1</b> ARIMA Performance</a></li>
+</ul></li>
+<li class="chapter" data-level="16.7" data-path="time-series.html"><a href="time-series.html#vector-autoregression"><i class="fa fa-check"></i><b>16.7</b> Vector Autoregression</a></li>
+<li class="chapter" data-level="16.8" data-path="time-series.html"><a href="time-series.html#assignment-15"><i class="fa fa-check"></i><b>16.8</b> Assignment</a></li>
+</ul></li>
+<li class="part"><span><b>II Topics</b></span></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i>Data Sources Overview</a><ul>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#macro-data"><i class="fa fa-check"></i>Macro Data</a><ul>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#us"><i class="fa fa-check"></i>US</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#other-us"><i class="fa fa-check"></i>Other US</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#micro-data"><i class="fa fa-check"></i>Micro Data</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#hawaii-data"><i class="fa fa-check"></i>Hawaii Data</a></li>
+<li class="chapter" data-level="" data-path="data-sources.html"><a href="data-sources.html#collections-of-data-lists"><i class="fa fa-check"></i>Collections of data lists</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html"><i class="fa fa-check"></i>Anscombe’s Quartet</a><ul>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#prep-the-data"><i class="fa fa-check"></i>Prep the data</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#numeric-summary"><i class="fa fa-check"></i>Numeric summary</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#visual-summary"><i class="fa fa-check"></i>Visual summary</a></li>
+<li class="chapter" data-level="" data-path="anscombe.html"><a href="anscombe.html#the-datasaurus-dozen"><i class="fa fa-check"></i>The Datasaurus Dozen</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i>Probability</a><ul>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#hot-hands"><i class="fa fa-check"></i>Hot Hands</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#saving-your-code"><i class="fa fa-check"></i>Saving your code</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#getting-started"><i class="fa fa-check"></i>Getting Started</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#compared-to-what"><i class="fa fa-check"></i>Compared to What?</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#simulations-in-r"><i class="fa fa-check"></i>Simulations in R</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#simulating-the-independent-shooter"><i class="fa fa-check"></i>Simulating the Independent Shooter</a></li>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#on-your-own"><i class="fa fa-check"></i>On your own</a><ul>
+<li class="chapter" data-level="" data-path="probability.html"><a href="probability.html#comparing-kobe-bryant-to-the-independent-shooter"><i class="fa fa-check"></i>Comparing Kobe Bryant to the Independent Shooter</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i>Distributions</a><ul>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#the-data"><i class="fa fa-check"></i>The Data</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#the-normal-distribution"><i class="fa fa-check"></i>The normal distribution</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#evaluating-the-normal-distribution"><i class="fa fa-check"></i>Evaluating the normal distribution</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#normal-probabilities"><i class="fa fa-check"></i>Normal probabilities</a></li>
+<li class="chapter" data-level="" data-path="distributions.html"><a href="distributions.html#on-your-own-1"><i class="fa fa-check"></i>On Your Own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="trifecta.html"><a href="trifecta.html"><i class="fa fa-check"></i>How to Judge Visualizations</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i>Intro to Inference</a><ul>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#the-data-1"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#the-unknown-sampling-distribution"><i class="fa fa-check"></i>The unknown sampling distribution</a></li>
+<li><a href="inference.html#interlude-the-for-loop">Interlude: The <code>for</code> loop</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#sample-size-and-the-sampling-distribution"><i class="fa fa-check"></i>Sample size and the sampling distribution</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#on-your-own-2"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i>Confidence Intervals</a><ul>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#sampling-from-ames-iowa"><i class="fa fa-check"></i>Sampling from Ames, Iowa</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#the-data-2"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-intervals"><i class="fa fa-check"></i>Confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-levels"><i class="fa fa-check"></i>Confidence levels</a></li>
+<li class="chapter" data-level="" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-your-own-3"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html"><i class="fa fa-check"></i>Inference for Numerical Data</a><ul>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#north-carolina-births"><i class="fa fa-check"></i>North Carolina births</a></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
+<li class="chapter" data-level="" data-path="inference.html"><a href="inference.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li><a href="inference-numerical.html#stats-package"><code>stats</code> package</a></li>
+<li class="chapter" data-level="" data-path="inference-numerical.html"><a href="inference-numerical.html#on-your-own-4"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html"><i class="fa fa-check"></i>Inference for Categorical Data</a><ul>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#the-survey"><i class="fa fa-check"></i>The survey</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#the-data-3"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#inference-on-proportions"><i class="fa fa-check"></i>Inference on proportions</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#how-does-the-proportion-affect-the-margin-of-error"><i class="fa fa-check"></i>How does the proportion affect the margin of error?</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#success-failure-condition"><i class="fa fa-check"></i>Success-failure condition</a></li>
+<li class="chapter" data-level="" data-path="inference-categorical.html"><a href="inference-categorical.html#on-your-own-5"><i class="fa fa-check"></i>On your own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i>Introduction to Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#batter-up"><i class="fa fa-check"></i>Batter up</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#the-data-4"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#sum-of-squared-residuals"><i class="fa fa-check"></i>Sum of squared residuals</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#the-linear-model"><i class="fa fa-check"></i>The linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction-and-prediction-errors"><i class="fa fa-check"></i>Prediction and prediction errors</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#model-diagnostics"><i class="fa fa-check"></i>Model diagnostics</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#on-your-own-6"><i class="fa fa-check"></i>On Your Own</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i>Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#grading-the-professor"><i class="fa fa-check"></i>Grading the professor</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#the-data-5"><i class="fa fa-check"></i>The data</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#exploring-the-data"><i class="fa fa-check"></i>Exploring the data</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#simple-linear-regression"><i class="fa fa-check"></i>Simple linear regression</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple linear regression</a></li>
+<li class="chapter" data-level="" data-path="multiple-regression.html"><a href="multiple-regression.html#the-search-for-the-best-model"><i class="fa fa-check"></i>The search for the best model</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Data Analysis and Visualization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="log" class="section level1">
+<h1><span class="header-section-number">Lecture 14</span> Log scales</h1>
+<p>The focus of this lecture is on log scales. The goal is to give you an intuition about when to use log scales and how to interpret them. We will refresh on basic log transformations and see how they affect how we can encode data in a variety of visualizations.</p>
+<p>This lecture uses the following packages:</p>
+<pre><code>tidyverse</code></pre>
+<div id="basic-log-review" class="section level2">
+<h2><span class="header-section-number">14.1</span> Basic Log Review</h2>
+<div id="order-of-magnitude" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> Order of magnitude</h3>
+<p>Remember that the log of a number is the exponent required to transform the base into the input.</p>
+<p>So that,</p>
+<p><span class="math display">\[ log_{10} (x) = y  \]</span></p>
+<p>implies</p>
+<p><span class="math display">\[ 10^y = x \]</span></p>
+<p>Let’s use a concrete example where <span class="math inline">\(x\)</span> is a vector of the integers from 1 to 100.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">100</span>
+x</code></pre></div>
+<pre><code>##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100</code></pre>
+<p>Let’s store the base 10 log of <span class="math inline">\(x\)</span> in the vector <span class="math inline">\(y\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">log</span>(x, <span class="dt">base =</span> <span class="dv">10</span>)
+y &lt;-<span class="st"> </span><span class="kw">log10</span>(x)
+y</code></pre></div>
+<pre><code>##   [1] 0.0000000 0.3010300 0.4771213 0.6020600 0.6989700 0.7781513 0.8450980
+##   [8] 0.9030900 0.9542425 1.0000000 1.0413927 1.0791812 1.1139434 1.1461280
+##  [15] 1.1760913 1.2041200 1.2304489 1.2552725 1.2787536 1.3010300 1.3222193
+##  [22] 1.3424227 1.3617278 1.3802112 1.3979400 1.4149733 1.4313638 1.4471580
+##  [29] 1.4623980 1.4771213 1.4913617 1.5051500 1.5185139 1.5314789 1.5440680
+##  [36] 1.5563025 1.5682017 1.5797836 1.5910646 1.6020600 1.6127839 1.6232493
+##  [43] 1.6334685 1.6434527 1.6532125 1.6627578 1.6720979 1.6812412 1.6901961
+##  [50] 1.6989700 1.7075702 1.7160033 1.7242759 1.7323938 1.7403627 1.7481880
+##  [57] 1.7558749 1.7634280 1.7708520 1.7781513 1.7853298 1.7923917 1.7993405
+##  [64] 1.8061800 1.8129134 1.8195439 1.8260748 1.8325089 1.8388491 1.8450980
+##  [71] 1.8512583 1.8573325 1.8633229 1.8692317 1.8750613 1.8808136 1.8864907
+##  [78] 1.8920946 1.8976271 1.9030900 1.9084850 1.9138139 1.9190781 1.9242793
+##  [85] 1.9294189 1.9344985 1.9395193 1.9444827 1.9493900 1.9542425 1.9590414
+##  [92] 1.9637878 1.9684829 1.9731279 1.9777236 1.9822712 1.9867717 1.9912261
+##  [99] 1.9956352 2.0000000</code></pre>
+<p>Notice in particular the following pattern:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log10</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">10000</span>))</code></pre></div>
+<pre><code>## [1] 0 1 2 3 4</code></pre>
+<p>It is useful to think of the logarithm (log) as recording the order of magnitude of the input value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">ggplot</span>(<span class="kw">data.frame</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="kw">aes</span>(x, y)) +
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>From looking at the scatter plot of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> you should notice that the space between larger values is diminished relative to the space between smaller values.</p>
+</div>
+<div id="percent-change" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> Percent change</h3>
+<p>A useful feature of logged variables is that the difference between two logged values is proportional to the percentage change in the original values. So, if the difference between two logged values is the same as the difference between two other logged values, the percentage change across both sets is the same.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log10</span>(<span class="dv">110</span>) -<span class="st"> </span><span class="kw">log10</span>(<span class="dv">100</span>)</code></pre></div>
+<pre><code>## [1] 0.04139269</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">110</span> -<span class="st"> </span><span class="dv">100</span>)/<span class="dv">100</span></code></pre></div>
+<pre><code>## [1] 0.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log10</span>(<span class="dv">220</span>) -<span class="st"> </span><span class="kw">log10</span>(<span class="dv">200</span>)</code></pre></div>
+<pre><code>## [1] 0.04139269</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">220</span> -<span class="st"> </span><span class="dv">200</span>)/<span class="dv">200</span></code></pre></div>
+<pre><code>## [1] 0.1</code></pre>
+<p>This is useful in visualizations because similar gaps in a log variable in different regions of the chart correspond to the same percentage change.</p>
+<p>To test this let’s create a variable that grows by a fixed percentage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">constant_growth =<span class="st"> </span><span class="dv">100</span> *<span class="st"> </span>(<span class="fl">1.10</span>) ^<span class="st"> </span>(<span class="dv">1</span>:<span class="dv">100</span>)
+constant_growth</code></pre></div>
+<pre><code>##   [1]     110.0000     121.0000     133.1000     146.4100     161.0510
+##   [6]     177.1561     194.8717     214.3589     235.7948     259.3742
+##  [11]     285.3117     313.8428     345.2271     379.7498     417.7248
+##  [16]     459.4973     505.4470     555.9917     611.5909     672.7500
+##  [21]     740.0250     814.0275     895.4302     984.9733    1083.4706
+##  [26]    1191.8177    1310.9994    1442.0994    1586.3093    1744.9402
+##  [31]    1919.4342    2111.3777    2322.5154    2554.7670    2810.2437
+##  [36]    3091.2681    3400.3949    3740.4343    4114.4778    4525.9256
+##  [41]    4978.5181    5476.3699    6024.0069    6626.4076    7289.0484
+##  [46]    8017.9532    8819.7485    9701.7234   10671.8957   11739.0853
+##  [51]   12912.9938   14204.2932   15624.7225   17187.1948   18905.9142
+##  [56]   20796.5057   22876.1562   25163.7719   27680.1490   30448.1640
+##  [61]   33492.9803   36842.2784   40526.5062   44579.1568   49037.0725
+##  [66]   53940.7798   59334.8578   65268.3435   71795.1779   78974.6957
+##  [71]   86872.1652   95559.3818  105115.3200  115626.8519  127189.5371
+##  [76]  139908.4909  153899.3399  169289.2739  186218.2013  204840.0215
+##  [81]  225324.0236  247856.4260  272642.0686  299906.2754  329896.9030
+##  [86]  362886.5933  399175.2526  439092.7778  483002.0556  531302.2612
+##  [91]  584432.4873  642875.7360  707163.3096  777879.6406  855667.6047
+##  [96]  941234.3651 1035357.8016 1138893.5818 1252782.9400 1378061.2340</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dv">1</span>:<span class="dv">100</span>, constant_growth)</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dv">1</span>:<span class="dv">100</span>, <span class="kw">log</span>(constant_growth))</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><code>diff(x)</code> returns a vector of the differences between consecutive values of <code>x</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(constant_growth)</code></pre></div>
+<pre><code>##  [1]     11.00000     12.10000     13.31000     14.64100     16.10510
+##  [6]     17.71561     19.48717     21.43589     23.57948     25.93742
+## [11]     28.53117     31.38428     34.52271     37.97498     41.77248
+## [16]     45.94973     50.54470     55.59917     61.15909     67.27500
+## [21]     74.00250     81.40275     89.54302     98.49733    108.34706
+## [26]    119.18177    131.09994    144.20994    158.63093    174.49402
+## [31]    191.94342    211.13777    232.25154    255.47670    281.02437
+## [36]    309.12681    340.03949    374.04343    411.44778    452.59256
+## [41]    497.85181    547.63699    602.40069    662.64076    728.90484
+## [46]    801.79532    881.97485    970.17234   1067.18957   1173.90853
+## [51]   1291.29938   1420.42932   1562.47225   1718.71948   1890.59142
+## [56]   2079.65057   2287.61562   2516.37719   2768.01490   3044.81640
+## [61]   3349.29803   3684.22784   4052.65062   4457.91568   4903.70725
+## [66]   5394.07798   5933.48578   6526.83435   7179.51779   7897.46957
+## [71]   8687.21652   9555.93818  10511.53200  11562.68519  12718.95371
+## [76]  13990.84909  15389.93399  16928.92739  18621.82013  20484.00215
+## [81]  22532.40236  24785.64260  27264.20686  29990.62754  32989.69030
+## [86]  36288.65933  39917.52526  43909.27778  48300.20556  53130.22612
+## [91]  58443.24873  64287.57360  70716.33096  77787.96406  85566.76047
+## [96]  94123.43651 103535.78016 113889.35818 125278.29400</code></pre>
+<p>Taking a look at the differences of the logged constant growth variable we see that we the change across values is now constant.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(<span class="kw">log</span>(constant_growth))</code></pre></div>
+<pre><code>##  [1] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+##  [7] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [13] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [19] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [25] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [31] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [37] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [43] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [49] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [55] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [61] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [67] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [73] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [79] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [85] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [91] 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018 0.09531018
+## [97] 0.09531018 0.09531018 0.09531018</code></pre>
+</div>
+<div id="histogram-comparison" class="section level3">
+<h3><span class="header-section-number">14.1.3</span> Histogram comparison</h3>
+<p>We can also compare the histogram of a normal distribution to a distribition that would be normal if we applied logs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="kw">rnorm</span>(<span class="dv">10000</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">1</span>), <span class="dt">main =</span> <span class="st">&quot;Normal Distribution&quot;</span>)</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="kw">exp</span>(<span class="kw">rnorm</span>(<span class="dv">10000</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">1</span>)), <span class="dt">main =</span> <span class="st">&quot;Log-normal distribution&quot;</span>)</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+<div id="data-11" class="section level2">
+<h2><span class="header-section-number">14.2</span> Data</h2>
+<p>For a practical application of logs we’ll look back at income. This time we’re using zip-code level data from the <a href="https://www.irs.gov/statistics/soi-tax-stats-statistics-of-income">IRS Statistics of Income (SOI)</a> program.</p>
+<p>There are a variety of datasets available on <a href="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-return-form-1040-statistics">individual income (form 1040)</a>. From the main <a href="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-zip-code-data-soi">zip-code data page</a>, click the link to the <a href="https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2015-zip-code-data-soi">2015 data</a>, then download the <a href="https://www.irs.gov/pub/irs-soi/15zpallnoagi.csv">CSV for all states without AGI</a>. The file with AGI breaks down the observations further into ranges of adjusted gross income (AGI). We will instead focus on the zip-level data across all AGI groups. You will also want to <a href="https://www.irs.gov/pub/irs-soi/15zpdoc.doc">download the documentation</a> to determine which variables we want to keep and how to interpret them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw_irs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/15zpallnoagi.csv&quot;</span>)
+
+irs &lt;-<span class="st"> </span>raw_irs %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(ZIPCODE !=<span class="st"> &#39;00000&#39;</span>) %&gt;%<span class="st"> </span><span class="co"># remove state-level summary</span>
+<span class="st">  </span><span class="kw">transmute</span>(
+    <span class="dt">zip =</span> ZIPCODE,
+    <span class="dt">state =</span> STATE,
+    <span class="dt">households =</span> N1,
+    <span class="dt">population =</span> N2,
+    <span class="dt">agi =</span> A00100,
+    <span class="dt">agi_pc =</span> agi /<span class="st"> </span>population,
+    <span class="dt">total_income =</span> A02650,
+    <span class="dt">wages =</span> A00200,
+    <span class="dt">farms =</span> SCHF,
+    <span class="dt">farm_proportion =</span> farms /<span class="st"> </span>households,
+    <span class="dt">taxes =</span> A10300,
+    <span class="dt">taxes_pc =</span> taxes /<span class="st"> </span>population,
+    <span class="dt">taxes_agi =</span> taxes /<span class="st"> </span>agi,
+    <span class="dt">taxes_total_income =</span> taxes /<span class="st"> </span>total_income
+  )
+<span class="kw">as.tibble</span>(irs)</code></pre></div>
+<pre><code>## # A tibble: 27,729 x 14
+##      zip state households population    agi   agi_pc total_income  wages
+##    &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+##  1 35004    AL       5110      10390 280757 27.02185       283221 231704
+##  2 35005    AL       3260       6450 130927 20.29876       131832 105561
+##  3 35006    AL       1230       2640  59415 22.50568        59695  46379
+##  4 35007    AL      12170      25760 693284 26.91320       701514 554651
+##  5 35010    AL       8160      17020 378765 22.25411       382646 261568
+##  6 35014    AL       1610       3150  73119 23.21238        73864  56756
+##  7 35016    AL       7010      14310 357800 25.00349       361470 263648
+##  8 35019    AL        890       1930  37188 19.26839        37640  29847
+##  9 35020    AL       9570      19680 257275 13.07292       259289 217474
+## 10 35022    AL       9770      19160 546843 28.54087       552470 434932
+## # ... with 27,719 more rows, and 6 more variables: farms &lt;dbl&gt;,
+## #   farm_proportion &lt;dbl&gt;, taxes &lt;dbl&gt;, taxes_pc &lt;dbl&gt;, taxes_agi &lt;dbl&gt;,
+## #   taxes_total_income &lt;dbl&gt;</code></pre>
+</div>
+<div id="logs-in-position" class="section level2">
+<h2><span class="header-section-number">14.3</span> Logs in position</h2>
+<div id="population-size-and-agi-per-capita" class="section level3">
+<h3><span class="header-section-number">14.3.1</span> Population size and AGI per capita</h3>
+<p>Let’s take a look first at the distribution of population and adjusted gross income per capita across zipcodes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(population, agi_pc)) +
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Remember that the log transformation compresses the space between larger values. Our scatter plot indicates that smaller values are currently more compressed. This is a signal that we should log transform our variables. The log transformation is useful for some of the assumptions of linear modelling. In the visual explorations here, the choice to log transform is largely aesthetic. If log transforming a variable makes it easier to visually inspect and understand your data, than it is useful.</p>
+</div>
+<div id="histogram-comparison-1" class="section level3">
+<h3><span class="header-section-number">14.3.2</span> Histogram comparison</h3>
+<p>Let’s look at the histogram for the <code>population</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(population)) +<span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>And now the logged version:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(population)) +<span class="st"> </span><span class="kw">geom_histogram</span>() +<span class="st"> </span><span class="kw">scale_x_log10</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>While the logged version of <code>population</code> feels closer to a normal distribution, it is clearly not normally distributed. Even though population across zip codes is not exactly log-normally distributed, it is still useful for creating easier to interpret and analyze visualizations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(population, agi_pc)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>) +
+<span class="st">  </span><span class="kw">geom_smooth</span>() +
+<span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales::comma) +
+<span class="st">  </span><span class="kw">scale_y_log10</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="taxes-and-farms" class="section level3">
+<h3><span class="header-section-number">14.3.3</span> Taxes and Farms</h3>
+<p>Let’s plot two proportions: the proportion of returns in a zipcode representing farms, <code>farm_proportion</code>, and the proportion of total income that is tax liability, <code>taxes_total_income</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(farm_proportion, taxes_total_income)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>While the data is densely packed near the origin, it does not mean it would be appropriate to log these variables. Keep in mind that the log of 0 is undefined and in the limit from the right is negative infinty. We can manually remove these values with a filter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs, <span class="kw">aes</span>(farm_proportion, taxes_total_income)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="st">  </span><span class="kw">geom_smooth</span>() +
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">labels =</span> scales::percent) </code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="logs-in-color" class="section level2">
+<h2><span class="header-section-number">14.4</span> Logs in color</h2>
+<p>Let’s tweak the last visualization by encoding <code>agi_pc</code> in the color of the points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs %&gt;%<span class="st"> </span><span class="kw">filter</span>(farm_proportion &gt;<span class="st"> </span><span class="dv">0</span>), <span class="kw">aes</span>(farm_proportion, taxes_total_income, <span class="dt">color =</span> agi_pc)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">labels =</span> scales::percent) </code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Using the transformation <code>log10</code> (see <code>trans</code> in the <code>?continuous_scale</code> documentation), we get a more gradual shift in color that makes it easier to see the changes in per capita adjusted gross income.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(irs %&gt;%<span class="st"> </span><span class="kw">filter</span>(farm_proportion &gt;<span class="st"> </span><span class="dv">0</span>), <span class="kw">aes</span>(farm_proportion, taxes_total_income, <span class="dt">color =</span> agi_pc)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_color_continuous</span>(<span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>)</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>We can finally change the <code>low</code> and <code>high</code> colors and add <code>alpha</code> to make our scatter plot easier to read. Note that I have added a log transformation to the size, which is tied to the <code>population</code> variable. Remove the log transformation to see the difference.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)
+<span class="kw">ggplot</span>(irs %&gt;%<span class="st"> </span><span class="kw">filter</span>(farm_proportion &gt;<span class="st"> </span><span class="dv">0</span>), <span class="kw">aes</span>(farm_proportion, taxes_total_income, <span class="dt">color =</span> agi_pc)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> population), <span class="dt">alpha =</span> <span class="fl">0.1</span>) +
+<span class="st">  </span><span class="kw">scale_x_log10</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_y_log10</span>(<span class="dt">labels =</span> scales::percent) +
+<span class="st">  </span><span class="kw">scale_color_continuous</span>(<span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>, <span class="dt">low =</span> scales::<span class="kw">muted</span>(<span class="st">&quot;red&quot;</span>), <span class="dt">high =</span> scales::<span class="kw">muted</span>(<span class="st">&quot;blue&quot;</span>)) +
+<span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">trans =</span> <span class="st">&quot;log10&quot;</span>)</code></pre></div>
+<p><img src="14-log_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="assignment-13" class="section level2">
+<h2><span class="header-section-number">14.5</span> Assignment</h2>
+<p>Choose two different variables from the <code>irs</code> dataset to visualize. Choose whether or not to log each variable in your visualization and explain why that was the right choice. Show at least one alternative (logged version vs. raw values) visualization and discuss how it compares to your preferred choice.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cross-setion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jonpage/r-course/edit/master/14-log.Rmd",
+"text": "Edit"
+},
+"download": ["jonpage-r-course.pdf", "jonpage-r-course.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
